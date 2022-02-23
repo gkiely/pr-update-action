@@ -109,7 +109,7 @@ async function run() {
     const processedBodyText = inputs.bodyTemplate
       .replace(baseTokenRegex, upperCase(inputs.bodyUppercaseBaseMatch, matches.baseMatch))
       .replace(headTokenRegex, upperCase(inputs.bodyUppercaseHeadMatch, matches.headMatch))
-      .replace(/VEX-/g, (matches.headMatch.match(/VEX-\d+/) || [])[0])
+      .replace(/VEX-/g, (matches.headMatch.match(/VEX-\d+/) || [])[0] || 'VEX-')
     core.info(`Processed body text: ${processedBodyText}`);
 
     const updateBody = ({
