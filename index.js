@@ -16,15 +16,16 @@ async function run() {
       titleInsertSpace: (core.getInput('title-insert-space').toLowerCase() === 'true'),
       titleUppercaseBaseMatch: (core.getInput('title-uppercase-base-match').toLowerCase() === 'true'),
       titleUppercaseHeadMatch: (core.getInput('title-uppercase-head-match').toLowerCase() === 'true'),
-      bodyTemplate: core.getInput('body-template') || github.context.payload.pull_request.body,
+      bodyTemplate: github.context.payload.pull_request.body,
       bodyUpdateAction: core.getInput('body-update-action').toLowerCase(),
       bodyNewlineCount: parseInt(core.getInput('body-newline-count')),
       bodyUppercaseBaseMatch: (core.getInput('body-uppercase-base-match').toLowerCase() === 'true'),
       bodyUppercaseHeadMatch: (core.getInput('body-uppercase-head-match').toLowerCase() === 'true'),
     }
     
-    console.log('body', github.context.payload.pull_request.body);
-    console.log('bodyTemplate', core.getInput('body-template'));
+    // console.log('body', github.context.payload.pull_request.body);
+    // console.log('bodyTemplate', core.getInput('body-template'));
+    console.log('>', inputs.bodyTemplate);
 
     const baseBranchRegex = inputs.baseBranchRegex.trim();
     const matchBaseBranch = baseBranchRegex.length > 0;
