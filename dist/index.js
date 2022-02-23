@@ -5950,7 +5950,6 @@ async function run() {
       token: core.getInput('repo-token', {required: true}),
       baseBranchRegex: core.getInput('base-branch-regex'),
       headBranchRegex: core.getInput('head-branch-regex'),
-      lowercaseBranch: (core.getInput('lowercase-branch').toLowerCase() === 'true'),
       titleTemplate: core.getInput('title-template'),
       titleUpdateAction: core.getInput('title-update-action').toLowerCase(),
       titleInsertSpace: (core.getInput('title-insert-space').toLowerCase() === 'true'),
@@ -5962,10 +5961,6 @@ async function run() {
       bodyUppercaseBaseMatch: (core.getInput('body-uppercase-base-match').toLowerCase() === 'true'),
       bodyUppercaseHeadMatch: (core.getInput('body-uppercase-head-match').toLowerCase() === 'true'),
     }
-    
-    // console.log('body', github.context.payload.pull_request.body);
-    // console.log('bodyTemplate', core.getInput('body-template'));
-    console.log('>', inputs.bodyTemplate);
 
     const baseBranchRegex = inputs.baseBranchRegex.trim();
     const matchBaseBranch = baseBranchRegex.length > 0;
@@ -5985,7 +5980,7 @@ async function run() {
 
     if (matchBaseBranch) {
       const baseBranchName = github.context.payload.pull_request.base.ref;
-      const baseBranch = inputs.lowercaseBranch ? baseBranchName.toLowerCase() : baseBranchName;
+      const baseBranch = baseBranchName;
       core.info(`Base branch: ${baseBranch}`);
 
       const baseMatches = baseBranch.match(new RegExp(baseBranchRegex));
@@ -6002,7 +5997,7 @@ async function run() {
 
     if (matchHeadBranch) {
       const headBranchName = github.context.payload.pull_request.head.ref;
-      const headBranch = inputs.lowercaseBranch ? headBranchName.toLowerCase() : headBranchName;
+      const headBranch = headBranchName;
       core.info(`Head branch: ${headBranch}`);
 
       const headMatches = headBranch.match(new RegExp(headBranchRegex));
@@ -6023,7 +6018,7 @@ async function run() {
       pull_number: github.context.payload.pull_request.number,
     }
 
-    const upperCase = (upperCase, text) => upperCase ? text.toUpperCase() : text;
+    const upperCase = (upperCase, text) => upperCase ? text : text;
 
     const title = github.context.payload.pull_request.title || '';
     const processedTitleText = inputs.titleTemplate
