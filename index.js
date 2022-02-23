@@ -107,8 +107,8 @@ async function run() {
 
     const body = github.context.payload.pull_request.body || '';
     const processedBodyText = inputs.bodyTemplate
-      .replace(baseTokenRegex, upperCase(inputs.bodyUppercaseBaseMatch, matches.baseMatch))
-      .replace(headTokenRegex, upperCase(inputs.bodyUppercaseHeadMatch, matches.headMatch))
+      .replace(baseTokenRegex, matches.baseMatch)
+      .replace(headTokenRegex, matches.headMatch)
       .replace(/VEX-/g, (matches.headMatch.match(/VEX-\d+/) || [])[0] || 'VEX-')
     core.info(`Processed body text: ${processedBodyText}`);
 
