@@ -23,7 +23,10 @@ async function run() {
       bodyUppercaseHeadMatch: (core.getInput('body-uppercase-head-match').toLowerCase() === 'true'),
     }
     
-    console.log('body', inputs.bodyTemplate);
+    console.log('context', github.context);
+    console.log('payload', github.context.payload);
+    console.log('pull_request', github.context.payload.pull_request);
+    console.log('body', github.context.payload.pull_request.body);
 
     const baseBranchRegex = inputs.baseBranchRegex.trim();
     const matchBaseBranch = baseBranchRegex.length > 0;
