@@ -6055,7 +6055,7 @@ async function run() {
     // And skip any that already have a number
     const ticketNumber = (matches.headMatch.match(/VEX-\d+/) || [])[0];
     if(ticketNumber){
-      processedBodyText = processedBodyText.replace(/VEX-(\s)/g, 'VEX-' + ticketNumber + '$1')
+      processedBodyText = processedBodyText.replace(/VEX-(\s)/g, ticketNumber + '$1')
     }
     core.info(`Processed body text: ${processedBodyText}`);
 
