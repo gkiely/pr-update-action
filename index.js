@@ -18,8 +18,6 @@ async function run() {
       bodyTemplate: github.context.payload.pull_request.body,
       bodyUpdateAction: core.getInput('body-update-action').toLowerCase(),
       bodyNewlineCount: parseInt(core.getInput('body-newline-count')),
-      bodyUppercaseBaseMatch: (core.getInput('body-uppercase-base-match').toLowerCase() === 'true'),
-      bodyUppercaseHeadMatch: (core.getInput('body-uppercase-head-match').toLowerCase() === 'true'),
     }
 
     const baseBranchRegex = inputs.baseBranchRegex.trim();
