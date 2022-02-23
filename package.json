@@ -4,6 +4,7 @@
   "description": "PR Update GitHub Action",
   "main": "index.js",
   "scripts": {
+    "deploy": "npm run build && git add . && git commit -m 'deploy' && git push",
     "build": "ncc build index.js --out dist",
     "lint": "eslint index.js",
     "test": "eslint index.js && jest"
