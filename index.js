@@ -108,8 +108,10 @@ async function run() {
     const body = github.context.payload.pull_request.body || '';
     const processedBodyText = inputs.bodyTemplate
       .replace(baseTokenRegex, matches.baseMatch)
-      .replace(headTokenRegex, matches.headMatch)
+      // Replace any references to VEX
       .replace(/VEX-/g, (matches.headMatch.match(/VEX-\d+/) || [])[0] || 'VEX-')
+      // Replace any references to %headbranch%
+      .replace(headTokenRegex, matches.headMatch)
     core.info(`Processed body text: ${processedBodyText}`);
 
     const updateBody = ({
